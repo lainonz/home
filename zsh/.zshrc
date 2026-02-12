@@ -126,8 +126,8 @@ if command -v fzf &> /dev/null; then
     setup_fzf_keybinds
 fi
 
-export PATH=$PATH:$HOME"/.local/bin":$HOME"/go/bin"
-export PATH=$HOME".opencode/bin":$PATH
+export PATH=$PATH:$HOME"/.local/bin/":$HOME"/go/bin"
+export PATH=$PATH:$HOME"/.opencode/bin"
 
 alias cat="bat --style=plain"
 alias v="nvim"
