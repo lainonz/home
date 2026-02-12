@@ -125,3 +125,7 @@ if command -v fzf &> /dev/null; then
     # Set up keybinds after fzf is loaded
     setup_fzf_keybinds
 fi
+
+alias cat="bat --style=plain"
+alias v="nvim"
+alias vim="nvim"
