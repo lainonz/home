@@ -9,11 +9,18 @@ home/
 ├── README.md              # This file
 ├── setup.sh               # Main installer script
 ├── .gitignore             # Exclude patterns
-└── zsh/                   # Zsh configuration
-    ├── .zshrc             # Main Zsh config
-    └── custom/            # Custom Oh My Zsh additions
-        └── themes/
-            └── wizard.zsh-theme
+├── zsh/                   # Zsh configuration
+│   ├── .zshrc             # Main Zsh config
+│   └── custom/            # Custom Oh My Zsh additions
+│       └── themes/
+│           └── wizard.zsh-theme
+└── zellij/                # Zellij configuration
+    ├── config.kdl         # Main Zellij config
+    ├── layouts/           # Custom layouts
+    ├── plugins/           # Custom plugins
+    ├── scripts/           # Helper scripts
+    ├── themes/            # UI themes
+    └── zjstatus-themes/   # Status bar themes
 ```
 
 ## 🚀 Quick Install
@@ -40,7 +47,8 @@ Run the setup script and choose what to install:
 
 Available options:
 1. **zsh** - Zsh shell with Oh My Zsh and custom configuration
-2. **all** - Install all available configurations
+2. **zellij** - Terminal multiplexer with custom layouts and themes
+3. **all** - Install all available configurations
 
 ## 📋 Configurations
 
@@ -69,6 +77,23 @@ Available options:
 - 🦀 Rust: version (when `Cargo.toml` detected)
 - 🐹 Go: version (when `go.mod`, `go.sum`, or `main.go` detected)
 
+### Zellij
+
+🦊 Features:
+- **Terminal Multiplexer**: Modern terminal workspace manager
+- **Custom Layouts**: Optimized layouts for development workflows
+- **Status Bar**: Rich status information with zjstatus
+- **Plugin System**: Extensible functionality
+- **Session Management**: Persistent sessions across reboots
+- **Theme Support**: Custom UI themes for better visual experience
+
+**Usage:**
+```bash
+zellij  # Start new session
+zellij attach  # List and attach to existing sessions
+zellij ls  # List active sessions
+```
+
 ## 🛠️ Management
 
 ### Adding New Configurations
@@ -76,7 +101,25 @@ Available options:
 1. Create directory: `config_name/`
 2. Add your config files
 3. Update `setup.sh` with new `install_config()` function
-4. Add to main menu
+4. Add to main menu with appropriate number
+
+Example for new config:
+```bash
+install_myconfig() {
+    echo ""
+    info "Installing MyConfig..."
+    # Installation logic here
+}
+```
+
+Update the menu in `main()`:
+```bash
+echo "Available configurations:"
+echo "1) zsh"
+echo "2) zellij"
+echo "3) myconfig"  # New option
+echo "4) all"
+```
 
 ### Backup and Restore
 
@@ -129,6 +172,7 @@ export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --border=rounded"
 - `zsh` (shell)
 - `fzf` (fuzzy completion)
 - `fd` (fast file search, optional)
+- `zellij` (terminal multiplexer, optional)
 
 **Package Managers Supported:**
 - `pacman` (Arch Linux)
@@ -137,11 +181,11 @@ export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --border=rounded"
 
 ## 🌿 Future Plans
 
-- [ ] Tmux configuration
 - [ ] Neovim setup
 - [ ] Git configuration
 - [ ] Shell scripts
 - [ ] System configurations
+- [ ] Other terminal tools
 
 ## 🤝 Contributing
 

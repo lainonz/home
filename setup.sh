@@ -146,23 +146,58 @@ install_zsh() {
     fi
 }
 
-# Future: install_zellij() { ... }
+# Install Zellij configuration
+install_zellij() {
+    echo ""
+    info "Installing Zellij configuration..."
+    
+    # Install Zellij
+    if ! command -v zellij &> /dev/null; then
+        log "Installing Zellij..."
+        if command -v pacman &> /dev/null; then
+            $PKG_INSTALL zellij
+        else
+            $PKG_INSTALL zellij
+        fi
+    else
+        warn "Zellij already installed"
+    fi
+    
+    # Create Zellij config directory
+    mkdir -p "$HOME/.config/zellij"
+    
+    # Link Zellij config
+    backup_and_symlink "$SCRIPT_DIR/zellij/config.kdl" "$HOME/.config/zellij/config.kdl"
+    backup_and_symlink "$SCRIPT_DIR/zellij/layouts" "$HOME/.config/zellij/layouts"
+    backup_and_symlink "$SCRIPT_DIR/zellij/plugins" "$HOME/.config/zellij/plugins"
+    backup_and_symlink "$SCRIPT_DIR/zellij/scripts" "$HOME/.config/zellij/scripts"
+    backup_and_symlink "$SCRIPT_DIR/zellij/themes" "$HOME/.config/zellij/themes"
+    backup_and_symlink "$SCRIPT_DIR/zellij/zjstatus-themes" "$HOME/.config/zellij/zjstatus-themes"
+    
+    log "Zellij configuration linked"
+}
+
 # Future: install_nvim() { ... }
 
 # Main installation
 main() {
     echo "Available configurations:"
     echo "1) zsh"
-    echo "2) all"
+    echo "2) zellij"
+    echo "3) all"
     echo ""
-    read -p "Choose what to install (1-2): " choice
+    read -p "Choose what to install (1-3): " choice
     
     case $choice in
         1)
             install_zsh
             ;;
         2)
+            install_zellij
+            ;;
+        3)
             install_zsh
+            install_zellij
             warn "More configurations coming soon (tmux, nvim, etc.)"
             ;;
         *)
@@ -176,15 +211,25 @@ main() {
     echo "================================"
     echo "📋 What's been configured:"
     
-    if [[ "$choice" == "1" || "$choice" == "2" ]]; then
+    if [[ "$choice" == "1" || "$choice" == "3" ]]; then
         echo "   • Zsh with Oh My Zsh"
         echo "   • Custom themes and plugins"
         echo "   • FZF integration"
     fi
     
+    if [[ "$choice" == "2" || "$choice" == "3" ]]; then
+        echo "   • Zellij terminal multiplexer"
+        echo "   • Custom layouts and themes"
+    fi
+    
     echo ""
     echo "🚀 To start using:"
-    echo "   exec zsh"
+    if [[ "$choice" == "1" || "$choice" == "3" ]]; then
+        echo "   exec zsh"
+    fi
+    if [[ "$choice" == "2" || "$choice" == "3" ]]; then
+        echo "   zellij  # start Zellij session"
+    fi
     echo ""
     echo "💡 Backup location: $BACKUP_DIR"
     echo "📖 Check README.md for more details"
