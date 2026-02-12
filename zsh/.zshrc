@@ -129,4 +129,5 @@ fi
 alias cat="bat --style=plain"
 alias v="nvim"
 alias vim="nvim"
+alias ls="eza --icons=always"
 eval "$(zoxide init zsh)"
