@@ -177,7 +177,7 @@ install_zellij() {
     log "Zellij configuration linked"
 }
 
-# Future: install_nvim() { ... }
+# install_initcpio()
 
 # Main installation
 main() {
