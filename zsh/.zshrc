@@ -130,4 +130,6 @@ alias cat="bat --style=plain"
 alias v="nvim"
 alias vim="nvim"
 alias ls="eza --icons=always"
+export PATH=$PATH:"$(pwd)/.local/bin"
 eval "$(zoxide init zsh)"
+
