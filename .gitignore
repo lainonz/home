@@ -1,0 +1,22 @@
+# Ignore files for Zsh config repo
+.DS_Store
+.zshrc.backup
+*.log
+tmp/
+temp/
+.ssh/
+aws/
+.cache/
+.local/share/
+.node_repl_history
+.python_history
+.rustup/
+.gnupg/
+.conda/
+.env
+.venv/
+node_modules/
+__pycache__/
+*.pyc
+target/
+ Cargo.lock
